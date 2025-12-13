@@ -10,26 +10,25 @@
       <div class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
         <slot></slot>
       </div>
-      <!-- Footer -->
       <footer class="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6 pt-0">
         <p class="text-sm text-center text-gray-500 dark:text-gray-400">
-          Designed and Developed by 
+          © 2026 MYSFC Systems. | Telephone: 
           <a 
             href="https://tailadmin.com/" 
             target="_blank" 
             rel="noopener noreferrer"
             class="text-brand-500 hover:text-brand-600 transition-colors duration-200 font-medium"
           >
-            TailAdmin
+            5035-32814
           </a>
-          ~ Distributed by 
+          ~ Email:
           <a 
             href="https://themewagon.com/" 
             target="_blank" 
             rel="noopener noreferrer"
             class="text-brand-500 hover:text-brand-600 transition-colors duration-200 font-medium"
           >
-            ThemeWagon
+            cesbg-it-mt-lh@mail.foxconn.com
           </a>
           .
         </p>
