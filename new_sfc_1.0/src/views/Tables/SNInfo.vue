@@ -11,10 +11,10 @@
 
 <script setup>
 import { ref } from "vue";
-import PageBreadcrumb from "@/components/common/PageBreadcrumb.vue";
+// import PageBreadcrumb from "@/components/common/PageBreadcrumb.vue";
 import AdminLayout from "@/components/layout/AdminLayout.vue";
 import ComponentCard from "@/components/common/ComponentCard.vue";
-import CNCTable from "@/components/tables/CNC/cnc.vue";
+import CNCTable from "@/components/tables/SNInfo/snInfo.vue";
 
-const currentPageTitle = ref("CNC Tables");
+const currentPageTitle = ref("SN履歷");
 </script>

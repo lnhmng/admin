@@ -31,6 +31,30 @@ const router = createRouter({
       },
     },
     {
+      path: '/mo-rework',
+      // name: 'CNC Tables',
+      component: () => import('../views/Tables/MO_REWORK.vue'),
+      meta: {
+        title: 'MO REWORK',
+      },
+    },
+    // {
+    //   path: '/SFC/barcode/history',
+    //   name: 'SN履歷',
+    //   component: () => import('../views/Tables/WipTrackingT.vue'),
+    //   meta: {
+    //     title: 'SN履歷',
+    //   },
+    // },
+    {
+      path: '/templates',
+      name: 'TEMPLATES',
+      component: () => import('../views/Tables/BasicTables.vue'),
+      meta: {
+        title: 'CNC Tables',
+      },
+    },
+    {
       path: '/error-404',
       name: '404 Error',
       component: () => import('../views/Errors/FourZeroFour.vue'),
@@ -38,15 +62,14 @@ const router = createRouter({
         title: '404 Error',
       },
     },
-
-    // {
-    //   path: '/signin',
-    //   name: 'Signin',
-    //   component: () => import('../views/Auth/Signin.vue'),
-    //   meta: {
-    //     title: 'Signin',
-    //   },
-    // },
+    {
+      path: '/signin',
+      name: 'Signin',
+      component: () => import('../views/Auth/Signin.vue'),
+      meta: {
+        title: 'Signin',
+      },
+    },
     // {
     //   path: '/signup',
     //   name: 'Signup',

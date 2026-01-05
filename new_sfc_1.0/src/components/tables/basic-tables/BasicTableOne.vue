@@ -1,271 +1,285 @@
 <template>
-    <!-- <div class="bg-white rounded-2xl p-6 shadow-sm">
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-10 gap-y-4">
-
-            <div class="flex items-center gap-4">
-                <span class="w-20 text-sm text-gray-600">产品SN</span>
-                <input type="text" placeholder="产品SN" class="flex-1 h-9 rounded-full bg-gray-100 px-4 text-sm
-                           focus:outline-none focus:ring-1 focus:ring-blue-500" />
-            </div>
-
-            <div class="flex items-center gap-4">
-                <span class="w-20 text-sm text-gray-600">设备编码</span>
-                <input type="text" placeholder="设备编码" class="flex-1 h-9 rounded-full bg-gray-100 px-4 text-sm
-                           focus:outline-none focus:ring-1 focus:ring-blue-500" />
-            </div>
-
-            <div class="flex items-center gap-4">
-                <span class="w-20 text-sm text-gray-600">创建时间</span>
-                <el-date-picker type="daterange" range-separator="-" start-placeholder="开始时间" end-placeholder="结束时间"
-                    class="flex-1" />
-            </div>
-        </div>
-
-        <div v-show="expanded" class="grid grid-cols-3 gap-6 mt-4"></div>
-
-        <div class="flex justify-end gap-4 mt-6">
-            <button class="h-9 px-8 rounded-full bg-blue-500 text-white text-sm hover:bg-blue-600">
-                搜索
-            </button>
-            <button class="h-9 px-8 rounded-full border border-blue-500 text-blue-500 text-sm hover:bg-blue-50">
-                清空
-            </button>
-            <button @click="exportData"
-                class="h-9 px-8 rounded-full border bg-green-400 text-white text-sm hover:bg-blue-50">
-                Export
-            </button>
-        </div>
-    </div> -->
-
+    <!-- ================= BỘ LỌC ================= -->
     <div class="bg-white rounded-2xl p-6 shadow-sm">
 
-        <!-- ===== BASIC FILTER (luôn hiển thị) ===== -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-x-10 gap-y-4">
 
+            <!-- Serial -->
             <div class="flex items-center gap-4">
-                <span class="w-20 text-sm text-gray-600">产品SN</span>
+                <span class="w-24 text-sm text-gray-600">Serial sản phẩm</span>
                 <input
+                    v-model="keyword"
                     type="text"
-                    placeholder="产品SN"
+                    placeholder="Nhập Serial"
                     class="flex-1 h-9 rounded-full bg-gray-100 px-4 text-sm
                            focus:outline-none focus:ring-1 focus:ring-blue-500"
                 />
             </div>
 
+            <!-- Mã thiết bị -->
             <div class="flex items-center gap-4">
-                <span class="w-20 text-sm text-gray-600">设备编码</span>
+                <span class="w-24 text-sm text-gray-600">Mã thiết bị</span>
                 <input
                     type="text"
-                    placeholder="设备编码"
+                    placeholder="Nhập mã máy"
                     class="flex-1 h-9 rounded-full bg-gray-100 px-4 text-sm
                            focus:outline-none focus:ring-1 focus:ring-blue-500"
                 />
             </div>
 
-            <div class="flex items-center gap-4">
-                <span class="w-20 text-sm text-gray-600">创建时间</span>
+            <!-- Thời gian tạo -->
+            <div class="flex items-center gap-4 relative">
+                <span class="w-24 text-sm text-gray-600">Thời gian tạo</span>
+
                 <el-date-picker
+                    v-model="dateRange"
                     type="daterange"
+                    start-placeholder="Từ ngày"
+                    end-placeholder="Đến ngày"
                     range-separator="-"
-                    start-placeholder="开始时间"
-                    end-placeholder="结束时间"
+                    placement="bottom-start"
+                    :teleported="false"
+                    popper-class="datepicker-fix"
                     class="flex-1"
                 />
             </div>
         </div>
 
-        <!-- ===== EXPANDED FILTER (可展开区域) ===== -->
-        <!--
-        expanded = true  → 显示
-        expanded = false → 隐藏
-        -->
-        <div v-show="expanded" class="grid grid-cols-3 gap-6 mt-4">
+        <!-- ================= MỞ RỘNG ================= -->
+        <div v-show="expanded" class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-4">
 
             <div class="flex items-center gap-4">
-                <span class="w-20 text-sm text-gray-600">工单状态</span>
-                <select
-                    class="flex-1 h-9 rounded-full bg-gray-100 px-4 text-sm
-                           focus:outline-none focus:ring-1 focus:ring-blue-500">
-                    <option value="">请选择</option>
+                <span class="w-24 text-sm text-gray-600">Trạng thái</span>
+                <select class="flex-1 h-9 rounded-full bg-gray-100 px-4 text-sm">
+                    <option value="">Tất cả</option>
+                    <option>Hoàn thành</option>
+                    <option>Đang chạy</option>
+                    <option>Lỗi</option>
                 </select>
             </div>
 
             <div class="flex items-center gap-4">
-                <span class="w-20 text-sm text-gray-600">工单类型</span>
-                <select
-                    class="flex-1 h-9 rounded-full bg-gray-100 px-4 text-sm
-                           focus:outline-none focus:ring-1 focus:ring-blue-500">
-                    <option value="">请选择</option>
+                <span class="w-24 text-sm text-gray-600">Loại công đơn</span>
+                <select class="flex-1 h-9 rounded-full bg-gray-100 px-4 text-sm">
+                    <option value="">Tất cả</option>
+                    <option>Sản xuất</option>
+                    <option>Kiểm tra</option>
+                    <option>Sửa chữa</option>
                 </select>
             </div>
 
             <div class="flex items-center gap-4">
-                <span class="w-20 text-sm text-gray-600">产品系列</span>
-                <select
-                    class="flex-1 h-9 rounded-full bg-gray-100 px-4 text-sm
-                           focus:outline-none focus:ring-1 focus:ring-blue-500">
-                    <option value="">请选择</option>
+                <span class="w-24 text-sm text-gray-600">Dòng sản phẩm</span>
+                <select class="flex-1 h-9 rounded-full bg-gray-100 px-4 text-sm">
+                    <option value="">Tất cả</option>
+                    <option>Mega CNC</option>
+                    <option>Mini CNC</option>
                 </select>
             </div>
         </div>
 
-        <!-- ===== ACTIONS ===== -->
+        <!-- ================= ACTION ================= -->
         <div class="flex justify-end gap-4 mt-6">
 
-            <!-- 展开 / 收起 -->
             <button
                 @click="expanded = !expanded"
-                class="text-sm text-blue-500 mr-auto flex items-center gap-1">
-                {{ expanded ? '收起' : '展开' }}
-                <svg
-                    class="w-4 h-4 transition-transform"
-                    :class="{ 'rotate-180': expanded }"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M19 9l-7 7-7-7" />
-                </svg>
-            </button>
-
-            <button class="h-9 px-8 rounded-full bg-blue-500 text-white text-sm hover:bg-blue-600">
-                搜索
-            </button>
-
-            <button class="h-9 px-8 rounded-full border border-blue-500 text-blue-500 text-sm hover:bg-blue-50">
-                清空
+                class="text-blue-500 mr-auto text-sm flex items-center gap-1">
+                {{ expanded ? 'Thu gọn' : 'Mở rộng' }}
+                <span :class="{ 'rotate-180': expanded }">▼</span>
             </button>
 
             <button
-                @click="exportData"
-                class="h-9 px-8 rounded-full bg-green-400 text-white text-sm hover:bg-green-500">
-                Export
+                @click="applyFilter"
+                class="h-9 px-8 rounded-full bg-blue-500 text-white text-sm">
+                Tìm kiếm
+            </button>
+
+            <button
+                @click="resetFilter"
+                class="h-9 px-8 rounded-full border border-blue-500 text-blue-500 text-sm">
+                Xóa lọc
+            </button>
+
+            <button
+                @click="deleteSelected"
+                class="h-9 px-8 rounded-full bg-red-500 text-white text-sm">
+                Xóa đã chọn
             </button>
         </div>
     </div>
 
-
-    <div class="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]">
-        <div class="max-w-full overflow-x-auto">
+    <!-- ================= BẢNG ================= -->
+    <div class="mt-6 overflow-hidden rounded-xl border bg-white">
+        <div class="overflow-x-auto">
 
             <table class="min-w-full table-auto">
 
-                <thead v-if="columns.length" class="bg-gray-50 dark:bg-gray-800/50">
-                    <tr class="border-b border-gray-200 dark:border-gray-700">
-                        <th v-for="(col, index) in columns" :key="index"
-                            class="px-5 py-3 text-left sm:px-6 whitespace-nowrap">
-                            <p class="font-semibold text-gray-600 text-sm dark:text-gray-300 !whitespace-nowrap">
-                                {{ col }}
-                            </p>
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th v-for="col in columns" :key="col"
+                            class="px-5 py-3 text-left text-sm font-semibold text-gray-600">
+                            {{ columnMap[col] || col }}
+                        </th>
+
+                        <!-- Checkbox bên phải -->
+                        <th class="px-4 py-3 text-center w-16">
+                            <input
+                                type="checkbox"
+                                v-model="selectAll"
+                                @change="toggleSelectAll"
+                            />
                         </th>
                     </tr>
                 </thead>
 
-                <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                    <tr v-for="(row, rowIndex) in users" :key="rowIndex"
-                        class="border-t border-gray-100 dark:border-gray-800 hover:bg-gray-50/50 dark:hover:bg-gray-800 transition duration-100">
-                        <td v-for="(col, colIndex) in columns" :key="colIndex"
-                            class="px-5 py-4 sm:px-6 text-sm text-gray-700 dark:text-gray-300">
+                <tbody class="divide-y">
+                    <tr
+                        v-for="row in pagedData"
+                        :key="row.SN"
+                        class="hover:bg-gray-50">
+
+                        <td v-for="col in columns" :key="col"
+                            class="px-5 py-3 text-sm text-gray-700">
                             {{ row[col] }}
+                        </td>
+
+                        <td class="px-4 py-3 text-center">
+                            <input
+                                type="checkbox"
+                                v-model="selectedRows"
+                                :value="row.SN"
+                            />
                         </td>
                     </tr>
                 </tbody>
 
             </table>
-
         </div>
 
-        <div v-if="totalPages > 1 || totalItems > 0"
-            class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 dark:border-gray-700 dark:bg-gray-900/50">
-            <div class="flex-1 flex justify-start">
-                <p class="text-sm text-gray-600 dark:text-gray-400">
-                    Showing <span class="font-semibold">{{ (currentPage - 1) * pageSize + 1 }}</span> to
-                    <span class="font-semibold">{{ Math.min(currentPage * pageSize, totalItems) }}</span> of
-                    <span class="font-semibold">{{ totalItems }}</span> entries
-                </p>
-            </div>
+        <!-- ================= PHÂN TRANG ================= -->
+        <div class="flex items-center justify-between px-4 py-3 border-t">
 
-            <div>
-                <nav class="inline-flex space-x-1 rounded-md shadow-sm" aria-label="Pagination">
-                    <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1"
-                        class="relative inline-flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-500 bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition duration-150">
-                        Previous
-                    </button>
+            <p class="text-sm text-gray-600">
+                Hiển thị
+                <b>{{ startItem }}</b> –
+                <b>{{ endItem }}</b>
+                / <b>{{ totalItems }}</b> bản ghi
+            </p>
 
-                    <button v-for="page in totalPages" :key="page" @click="changePage(page)" :class="[
-                        'relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-md transition duration-150',
+            <div class="space-x-1">
+                <button
+                    @click="changePage(currentPage - 1)"
+                    :disabled="currentPage === 1"
+                    class="px-3 py-1 rounded bg-gray-100 disabled:opacity-50">
+                    Trước
+                </button>
+
+                <button
+                    v-for="page in totalPages"
+                    :key="page"
+                    @click="changePage(page)"
+                    :class="[
+                        'px-3 py-1 rounded',
                         page === currentPage
-                            ? 'bg-teal-500 text-white font-bold'
-                            : 'text-gray-700 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                            ? 'bg-blue-500 text-white'
+                            : 'bg-gray-100'
                     ]">
-                        {{ page }}
-                    </button>
+                    {{ page }}
+                </button>
 
-                    <button @click="changePage(currentPage + 1)" :disabled="currentPage === totalPages"
-                        class="relative inline-flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-500 bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 transition duration-150">
-                        Next
-                    </button>
-                </nav>
+                <button
+                    @click="changePage(currentPage + 1)"
+                    :disabled="currentPage === totalPages"
+                    class="px-3 py-1 rounded bg-gray-100 disabled:opacity-50">
+                    Sau
+                </button>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import axios from "axios";
+import { ref, computed, onMounted, watch } from "vue";
+
+/* ================= BIẾN ================= */
+const keyword = ref("");
+const dateRange = ref([]);
+const expanded = ref(false);
 
 const users = ref([]);
 const columns = ref([]);
 
-const keyword = ref("");
-const dateRange = ref([]);
+const selectedRows = ref([]);
+const selectAll = ref(false);
 
 const currentPage = ref(1);
-const pageSize = ref(20);
-const totalItems = ref(100);
-const totalPages = ref(5);
+const pageSize = ref(2);
 
-const fetchData = async () => {
-    try {
-        const url = `https://localhost:44361/api/MegaCNC?page=${currentPage.value}&pageSize=${pageSize.value}`;
-        const response = await axios.get(url, {
-            headers: {
-                Authorization: `Bearer eyJ0eXAiOiJhdCtqd3QiLCJhbGciOiJFUzI1NiIsImtpZCI6IjUwM2Q4NzQyYWMzOWQ1Y2UwOTY2NjEwMGVkYzA2OTQwIn0.eyJpc3MiOiJodHRwczovL2lkcC5sb2NhbCIsImF1ZCI6ImFwaTEiLCJzdWIiOiI1YmU4NjM1OTA3M2M0MzRiYWQyZGEzOTMyMjIyZGFiZSIsImNsaWVudF9pZCI6Ik1lZ2FDTkMiLCJlbXBfbm8iOiJJVCBKV1QiLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3NjUxODU4NDUsImlhdCI6MTc2NTE4MjI0NSwianRpIjoiNWVjNTlhYTU4OGRmMzMwZGJlNzc5YTBlZTVhY2RjNjUifQ.Cx8fMr23mGFx_KuGiYAS0lc_ESsz_DqkRI5odxgyQkCTF_RrgLjCUqWZTTFMTBfkgqt3pq669NI69kHYrXAV6A`
-            }
-        });
-
-        let data = response.data.data || response.data;
-
-        if (Array.isArray(data) && data.length > 0) {
-            users.value = data;
-
-            if (columns.value.length === 0) {
-                columns.value = Object.keys(data[0]);
-            }
-        } else {
-            users.value = [];
-        }
-
-    } catch (err) {
-        console.error("API ERROR:", err);
-    }
+/* ================= MAP CỘT ================= */
+const columnMap = {
+    SN: "Serial sản phẩm",
+    MachineCode: "Mã máy",
+    Status: "Trạng thái",
+    Type: "Loại công đơn",
+    ProductLine: "Dòng sản phẩm",
+    CreateTime: "Thời gian tạo"
 };
 
+/* ================= FAKE DATA ================= */
+const fetchData = () => {
+    users.value = [
+        { SN: "SN001", MachineCode: "CNC-01", Status: "Hoàn thành", Type: "Sản xuất", ProductLine: "Mega CNC", CreateTime: "2025-12-15" },
+        { SN: "SN002", MachineCode: "CNC-02", Status: "Đang chạy", Type: "Kiểm tra", ProductLine: "Mega CNC", CreateTime: "2025-12-15" },
+        { SN: "SN003", MachineCode: "CNC-03", Status: "Lỗi", Type: "Sửa chữa", ProductLine: "Mini CNC", CreateTime: "2025-12-16" }
+    ];
+
+    columns.value = Object.keys(users.value[0]);
+    selectedRows.value = [];
+    selectAll.value = false;
+};
+
+/* ================= PHÂN TRANG ================= */
+const totalItems = computed(() => users.value.length);
+const totalPages = computed(() =>
+    Math.ceil(totalItems.value / pageSize.value)
+);
+
+const pagedData = computed(() => {
+    const start = (currentPage.value - 1) * pageSize.value;
+    return users.value.slice(start, start + pageSize.value);
+});
+
+const startItem = computed(() =>
+    totalItems.value === 0 ? 0 : (currentPage.value - 1) * pageSize.value + 1
+);
+
+const endItem = computed(() =>
+    Math.min(currentPage.value * pageSize.value, totalItems.value)
+);
+
+/* ================= CHECKBOX ================= */
+const toggleSelectAll = () => {
+    selectAll.value
+        ? selectedRows.value = pagedData.value.map(r => r.SN)
+        : selectedRows.value = [];
+};
+
+watch(selectedRows, () => {
+    selectAll.value =
+        pagedData.value.length > 0 &&
+        selectedRows.value.length === pagedData.value.length;
+});
+
+/* ================= ACTION ================= */
 const changePage = (page) => {
-    if (page >= 1 && page <= totalPages.value && page !== currentPage.value) {
+    if (page >= 1 && page <= totalPages.value) {
         currentPage.value = page;
-        fetchData();
+        selectedRows.value = [];
+        selectAll.value = false;
     }
 };
 
-const expanded = ref(false);
-
-const applyFilter = () => {
-    currentPage.value = 1;
-    fetchData();
-};
+const applyFilter = () => fetchData();
 
 const resetFilter = () => {
     keyword.value = "";
@@ -273,14 +287,25 @@ const resetFilter = () => {
     fetchData();
 };
 
-const exportData = () => {
-    alert("Đang xuất dữ liệu...");
-    console.log("Xuất dữ liệu...");
+const deleteSelected = () => {
+    if (!selectedRows.value.length) {
+        alert("Chưa chọn dữ liệu để xóa");
+        return;
+    }
+
+    users.value = users.value.filter(
+        r => !selectedRows.value.includes(r.SN)
+    );
+
+    selectedRows.value = [];
+    selectAll.value = false;
 };
 
-
-onMounted(() => {
-    totalPages.value = Math.ceil(totalItems.value / pageSize.value);
-    fetchData();
-});
+onMounted(fetchData);
 </script>
+
+<style scoped>
+:deep(.datepicker-fix) {
+    z-index: 3000 !important;
+}
+</style>

@@ -168,7 +168,11 @@ const menuGroups = [
         name: "SFC Management",
         icon: GridIcon,
         subItems: [
-          { name: "CNC", path: "/cnc", pro: false }
+          // { name: "basic-tables", path: "/templates", pro: false },
+          { name: "CNC", path: "/cnc", pro: false },
+          { name: "MO Rework", path: "/mo-rework", pro: false },
+          // { name: "SN履歷", path: "/SFC/barcode/history", pro: false },  
+          // { name: "Repair Tables", path: "/repair", pro: false },
         ]
       },
       {
@@ -186,7 +190,7 @@ const menuGroups = [
         name: "Authentication",
         subItems: [
           { name: "Signin", path: "/signin", pro: false },
-          { name: "Signup", path: "/signup", pro: false },
+          // { name: "Signup", path: "/signup", pro: false },
         ],
       },
     ],
@@ -224,7 +228,7 @@ const startTransition = (el) => {
   el.style.height = "auto";
   const height = el.scrollHeight;
   el.style.height = "0px";
-  el.offsetHeight; 
+  el.offsetHeight;
   el.style.height = height + "px";
 };
 
