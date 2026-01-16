@@ -152,6 +152,7 @@ import {
   ChevronDownIcon,
   HorizontalDots,
   PlugInIcon,
+  SettingsIcon
 } from "../../icons";
 import SidebarWidget from "./SidebarWidget.vue";
 import { useSidebar } from "@/composables/useSidebar";
@@ -165,12 +166,21 @@ const menuGroups = [
     title: "Menu",
     items: [
       {
+        name: "生产执行",
+        icon: SettingsIcon,
+        subItems: [
+          // { name: "basic-tables", path: "/templates", pro: false },
+          { name: "SN to MO Rework", path: "/mo-rework", pro: false },
+          // { name: "SN履歷", path: "/SFC/barcode/history", pro: false },  
+          // { name: "Repair Tables", path: "/repair", pro: false },
+        ]
+      },
+      {
         name: "SFC Management",
         icon: GridIcon,
         subItems: [
           // { name: "basic-tables", path: "/templates", pro: false },
           { name: "CNC", path: "/cnc", pro: false },
-          { name: "MO Rework", path: "/mo-rework", pro: false },
           // { name: "SN履歷", path: "/SFC/barcode/history", pro: false },  
           // { name: "Repair Tables", path: "/repair", pro: false },
         ]
