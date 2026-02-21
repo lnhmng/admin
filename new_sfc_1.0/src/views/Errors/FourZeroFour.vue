@@ -11,9 +11,9 @@
         ERROR
       </h1>
 
-      <img src="/images/error/404.svg" alt="404" class="dark:hidden" />
+      <img src="" alt="404" class="dark:hidden" />
       <img
-        src="/images/error/404-dark.svg"
+        src=""
         alt="404"
         class="hidden dark:block"
       />

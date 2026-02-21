@@ -2,7 +2,7 @@
   <div class="relative">
     <div id="pane" class="overflow-hidden">
       <img
-        src="/images/grid-image/image-01.png"
+        src=""
         alt="Cover"
         class="w-full border border-gray-200 rounded-xl dark:border-gray-800"
       />

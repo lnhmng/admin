@@ -14,9 +14,9 @@
       !isExpanded && !isHovered ? 'lg:justify-center' : 'justify-start',
     ]">
       <router-link to="/">
-        <img v-if="isExpanded || isHovered || isMobileOpen" class="hidden dark:block" src="/images/logo/logo-dark.svg"
+        <img v-if="isExpanded || isHovered || isMobileOpen" class="hidden dark:block" src=""
           alt="Logo" width="150" height="40" />
-        <img v-else src="/images/logo/logo-icon.svg" alt="Logo" width="32" height="32" />
+        <img v-else src="" alt="Logo" width="32" height="32" />
       </router-link>
     </div>
     <div class="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">
@@ -171,7 +171,8 @@ const menuGroups = [
         subItems: [
           // { name: "basic-tables", path: "/templates", pro: false },
           { name: "SN to MO Rework", path: "/mo-rework", pro: false },
-          // { name: "SN履歷", path: "/SFC/barcode/history", pro: false },  
+          { name: "Barcode Check 2", path: "/barcode-check2", pro: false},
+          // { name: "Liên kết TEM", path: "/tem-link", pro: false },  
           // { name: "Repair Tables", path: "/repair", pro: false },
         ]
       },
@@ -184,11 +185,6 @@ const menuGroups = [
           // { name: "SN履歷", path: "/SFC/barcode/history", pro: false },  
           // { name: "Repair Tables", path: "/repair", pro: false },
         ]
-      },
-      {
-        icon: CalenderIcon,
-        name: "Calendar",
-        path: "/calendar",
       }
     ],
   },

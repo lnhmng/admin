@@ -14,7 +14,7 @@
         <p class="text-sm text-center text-gray-500 dark:text-gray-400">
           © 2026 MYSFC Systems. | Telephone: 
           <a 
-            href="https://tailadmin.com/" 
+            href="" 
             target="_blank" 
             rel="noopener noreferrer"
             class="text-brand-500 hover:text-brand-600 transition-colors duration-200 font-medium"

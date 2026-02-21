@@ -9,19 +9,19 @@ const router = createRouter({
     {
       path: '/',
       name: 'Ecommerce',
-      component: () => import('../views/Ecommerce.vue'),
+      component: () => import('../views/Others/Calendar.vue'),
       meta: {
         title: 'SFC System',
       },
     },
-    {
-      path: '/calendar',
-      name: 'Calendar',
-      component: () => import('../views/Others/Calendar.vue'),
-      meta: {
-        title: 'Calendar',
-      },
-    },
+    // {
+    //   path: '/calendar',
+    //   name: 'Calendar',
+    //   component: () => import('../views/Others/Calendar.vue'),
+    //   meta: {
+    //     title: 'Calendar',
+    //   },
+    // },
     {
       path: '/cnc',
       name: 'CNC Tables',
@@ -32,44 +32,49 @@ const router = createRouter({
     },
     {
       path: '/mo-rework',
-      // name: 'CNC Tables',
       component: () => import('../views/Tables/MO_REWORK.vue'),
       meta: {
         title: 'MO REWORK',
       },
     },
+    {
+      path: '/barcode-check2',
+      component: () => import('../views/Tables/BarcodeCheck2.vue'),
+      meta: {
+        title: 'BARCODE CHECK 2'
+      }
+    },
     // {
-    //   path: '/SFC/barcode/history',
-    //   name: 'SN履歷',
-    //   component: () => import('../views/Tables/WipTrackingT.vue'),
+    //   path: '/tem-link',
+    //   component: () => import('../views/Tables/TemLink.vue'),
     //   meta: {
-    //     title: 'SN履歷',
+    //     title: 'TEM LINK',
     //   },
     // },
-    {
-      path: '/templates',
-      name: 'TEMPLATES',
-      component: () => import('../views/Tables/BasicTables.vue'),
-      meta: {
-        title: 'CNC Tables',
-      },
-    },
-    {
-      path: '/error-404',
-      name: '404 Error',
-      component: () => import('../views/Errors/FourZeroFour.vue'),
-      meta: {
-        title: '404 Error',
-      },
-    },
-    {
-      path: '/signin',
-      name: 'Signin',
-      component: () => import('../views/Auth/Signin.vue'),
-      meta: {
-        title: 'Signin',
-      },
-    },
+    // {
+    //   path: '/templates',
+    //   name: 'TEMPLATES',
+    //   component: () => import('../views/Tables/BasicTables.vue'),
+    //   meta: {
+    //     title: 'CNC Tables',
+    //   },
+    // },
+    // {
+    //   path: '/error-404',
+    //   name: '404 Error',
+    //   component: () => import('../views/Errors/FourZeroFour.vue'),
+    //   meta: {
+    //     title: '404 Error',
+    //   },
+    // },
+    // {
+    //   path: '/signin',
+    //   name: 'Signin',
+    //   component: () => import('../views/Auth/Signin.vue'),
+    //   meta: {
+    //     title: 'Signin',
+    //   },
+    // },
     // {
     //   path: '/signup',
     //   name: 'Signup',

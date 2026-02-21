@@ -25,7 +25,7 @@
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
           <div class="items-center w-full rounded-full max-w-8">
-            <img src="/images/country/country-01.svg" alt="usa" />
+            <img src="" alt="usa" />
           </div>
           <div>
             <p class="font-semibold text-gray-800 text-theme-sm dark:text-white/90">USA</p>
@@ -48,7 +48,7 @@
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
           <div class="items-center w-full rounded-full max-w-8">
-            <img src="/images/country/country-02.svg" alt="france" />
+            <img src="" alt="france" />
           </div>
           <div>
             <p class="font-semibold text-gray-800 text-theme-sm dark:text-white/90">France</p>
@@ -96,18 +96,6 @@ const initMap = () => {
         },
       },
       markers: [
-        {
-          name: 'Egypt',
-          coords: [26.8206, 30.8025],
-        },
-        {
-          name: 'United States',
-          coords: [55.3781, 3.436],
-        },
-        {
-          name: 'United States',
-          coords: [37.0902, -95.7129],
-        },
       ],
       markerStyle: {
         initial: {
